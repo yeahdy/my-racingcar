@@ -11,6 +11,7 @@ import java.util.List;
 import model.Car;
 import model.Game;
 import service.CarGameService;
+import validators.NameValidator;
 import view.InputView;
 import view.OutputView;
 
@@ -42,39 +43,19 @@ public class CarController {
         outputView.printGameMessage(GAME_START);
         String carNames = Console.readLine();
 
-        if(!inputView.isBlank(carNames) || !validateCarNameList(carNames)){
+        if(!inputView.isNotBlank(carNames) || !NameValidator.verifyNameList(carNames)){
             throw new IllegalArgumentException();
         }
         return carNames;
     }
 
-    /**
-     * 사용자가 입력한 자동차 이름 유효성 검사
-     * - 공백일 경우 예외 발생
-     * - 5자 이하일 경우 예외 발생
-     *
-     * @param carList
-     * @return 예외를 발생 시키지 않으면 true 리턴
-     */
-    private boolean validateCarNameList(String carList){
-        String[] carArray = carList.split(",");
 
-        for(String carName : carArray){
-            if(carName.isBlank()){
-                throw new IllegalArgumentException(ErrorCodeConstant.STRING_BLANK_ERROR);
-            }
-            if(GameConstant.MAX_NAME_LENGTH < carName.length()){
-                throw new IllegalArgumentException(ErrorCodeConstant.NAME_LENGTH_ERROR);
-            }
-        }
-        return true;
-    }
 
     private int setTryCount(){
         outputView.printGameMessage(TRY_COUNT);
         String tryCount = Console.readLine();
 
-        if(!inputView.isBlank(tryCount) || !validateTryCount(tryCount)){
+        if(!inputView.isNotBlank(tryCount) || !verifyTryCount(tryCount)){
             throw new IllegalArgumentException();
         }
         return Integer.parseInt(tryCount);
@@ -89,7 +70,7 @@ public class CarController {
      * @param tryCount
      * @return 예외를 발생 시키지 않으면 true 리턴
      */
-    private boolean validateTryCount(String tryCount){
+    private boolean verifyTryCount(String tryCount){
         final String REGEX = "[0-9]+";
 
         if(!tryCount.matches(REGEX)) {

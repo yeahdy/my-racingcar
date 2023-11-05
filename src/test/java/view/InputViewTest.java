@@ -21,7 +21,7 @@ public class InputViewTest {
     @ParameterizedTest
     @ValueSource(strings = {""," ",",","라라","''","라라, ","다   섯"})
     void isBlankTest(String data){
-        Assertions.assertThatThrownBy(() -> assertThat(inputView.isBlank(data)).isTrue())
+        Assertions.assertThatThrownBy(() -> assertThat(inputView.isNotBlank(data)).isTrue())
                 .isInstanceOf(IllegalArgumentException.class);
     }
 

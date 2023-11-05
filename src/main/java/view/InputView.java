@@ -16,7 +16,7 @@ public class InputView {
      * @param data
      * @return 예외를 발생 시키지 않으면 true 리턴
      */
-    public boolean isBlank(String data){
+    public boolean isNotBlank(String data){
         if(data.isBlank()){
             throw new IllegalArgumentException(ErrorCodeConstant.STRING_BLANK_ERROR);
         }
