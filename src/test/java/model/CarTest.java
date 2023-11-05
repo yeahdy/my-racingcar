@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -16,11 +17,20 @@ public class CarTest {
         car = new Car();
     }
 
-    @DisplayName("4 이상이면 true, 아니면 false")
-    @ParameterizedTest
-    @ValueSource(ints = {4,0,3,9})
-    void isStepForwardTest(int randomNumber){
-        assertThat(car.isStepForward(randomNumber)).isTrue();
+
+    @Test
+    @DisplayName("랜덤 수는 0 ~ 9 사이에 무작위로 반환")
+    void getRandomNumberTest(){
+        assertThat(car.getRandomNumber()).isBetween(0,9);
     }
+
+    @ParameterizedTest
+    @ValueSource(ints = {4,5,9})
+    @DisplayName("4 이상이면 true")
+    void isStepForwardTest(int number){
+        assertThat(car.isStepForward(number)).isTrue();
+    }
+
+
 
 }
