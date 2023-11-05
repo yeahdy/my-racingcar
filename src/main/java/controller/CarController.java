@@ -12,6 +12,7 @@ import model.Car;
 import model.Game;
 import service.CarGameService;
 import validators.NameValidator;
+import validators.TryCountValidator;
 import view.InputView;
 import view.OutputView;
 
@@ -50,42 +51,14 @@ public class CarController {
     }
 
 
-
     private int setTryCount(){
         outputView.printGameMessage(TRY_COUNT);
         String tryCount = Console.readLine();
 
-        if(!inputView.isNotBlank(tryCount) || !verifyTryCount(tryCount)){
+        if(!inputView.isNotBlank(tryCount) || !TryCountValidator.verifyTryCount(tryCount)){
             throw new IllegalArgumentException();
         }
         return Integer.parseInt(tryCount);
-    }
-
-    /**
-     * 시도 횟수 유효성 검사
-     * - 숫자 외의 문자가 있을 경우 예외 발생
-     * - int 정수 최대 범위를 초과할 경우 예외 발생
-     * - 숫자 0 입력할 경우 예외 발생
-     *
-     * @param tryCount
-     * @return 예외를 발생 시키지 않으면 true 리턴
-     */
-    private boolean verifyTryCount(String tryCount){
-        final String REGEX = "[0-9]+";
-
-        if(!tryCount.matches(REGEX)) {
-            throw new IllegalArgumentException(ErrorCodeConstant.NUMBER_VALIDATION_ERROR);
-        }
-
-        int tryCountNumber = Integer.parseInt(tryCount);
-        if(tryCountNumber > Integer.MAX_VALUE) {
-            throw new IllegalArgumentException(ErrorCodeConstant.MAX_NUMBER_ERROR);
-        }
-        if (tryCountNumber == GameConstant.MIN_TRY_COUNT) {
-            throw new IllegalArgumentException(ErrorCodeConstant.MIN_TRY_COUNT_ERROR);
-        }
-
-        return true;
     }
 
     private List<Car> getRacingGameResult(List<Car> carList){
