@@ -26,9 +26,16 @@ public class CarTest {
 
     @ParameterizedTest
     @ValueSource(ints = {4,5,9})
-    @DisplayName("4 이상이면 true")
+    @DisplayName("4 이상이면 한칸 전진한다.")
     void isStepForwardTest(int number){
+        //given
         assertThat(car.isStepForward(number)).isTrue();
+
+        //when
+        car.MoveForward();
+
+        //then
+        assertThat(car.getStepCount()).isEqualTo(1);
     }
 
 
