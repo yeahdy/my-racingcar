@@ -65,16 +65,17 @@ public class CarController {
         List<Car> racingGameResult = null;
         while (Game.tryCount > 0){
             racingGameResult = carGameService.runRacingGame(carList);
-
-            List<String> getRacingGameResultList = carGameService.getRacingGameResultList(racingGameResult);
-
-            for(String result : getRacingGameResultList){
-                outputView.print(result);
-            }
-            outputView.print("");
+            printWinnerList(racingGameResult);
         }
         return racingGameResult;
     }
 
+    private void printWinnerList(List<Car> racingGameResult){
+        List<String> getRacingGameWinnerList = carGameService.getRacingGameWinnerList(racingGameResult);
+        for(String result : getRacingGameWinnerList){
+            outputView.print(result);
+        }
+        outputView.print("");
+    }
 
 }
