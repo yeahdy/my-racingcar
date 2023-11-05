@@ -4,6 +4,7 @@ import constants.GameConstant;
 import constants.MessageType;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Game {
     public static int tryCount;
@@ -19,10 +20,13 @@ public class Game {
                 .mapToInt(Car::getStepCount)
                 .toArray();
 
-        int maxStepCount = Arrays.stream(stepCountArray)
+        return getMaxNumber(stepCountArray);
+    }
+
+    private int getMaxNumber(int[] numberArray){
+        return Arrays.stream(numberArray)
                 .max()
                 .orElse(0);
-        return maxStepCount;
     }
 
     /**
@@ -44,15 +48,10 @@ public class Game {
     }
 
     private String getCommaResult(List<Car> carList, int maxStepCount){
-        String winnerList = "";
-        for(Car car : carList){
-            if(car.getStepCount() == maxStepCount){
-                winnerList += new StringBuilder(car.getName())
-                        .append(", ");
-            }
-        }
-
-        return winnerList;
+        return carList.stream()
+                .filter(car -> car.getStepCount() == maxStepCount)
+                .map(Car::getName)
+                .collect(Collectors.joining(", "));
     }
 
     private String removeCommaResult(String winnerList){
