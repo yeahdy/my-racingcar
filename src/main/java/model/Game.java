@@ -30,14 +30,14 @@ public class Game {
     }
 
     /**
-     * 우승자 결과 데이터 가공하기
+     * 자동차 중 최대 전진 수와 같은 자동차를 판별하여 우승자를 선발한다.
      *
      * @param carList 경주한 자동차들의 결과를 담은 List
      * @param maxStepCount 경주한 자동차 중 가장 많이 움직인 전진 수
-     * @return 우승자를 선발하여 데이터를 가공한 후 리턴
+     * @return 우승자를 선발하여 게임메시지데이터를 가공한 후 리턴
      */
     public String getWinnerList(List<Car> carList, int maxStepCount){
-        String winnerList = getCommaResult(carList, maxStepCount);
+        String winnerList = getWinnerResult(carList, maxStepCount);
 
         winnerList = removeCommaResult(winnerList);
 
@@ -47,7 +47,7 @@ public class Game {
         return winnerList;
     }
 
-    private String getCommaResult(List<Car> carList, int maxStepCount){
+    private String getWinnerResult(List<Car> carList, int maxStepCount){
         return carList.stream()
                 .filter(car -> car.getStepCount() == maxStepCount)
                 .map(Car::getName)

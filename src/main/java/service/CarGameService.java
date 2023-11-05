@@ -32,7 +32,7 @@ public class CarGameService {
     }
 
     /**
-     * 한판의 레이싱 게임 실행
+     * 한판의 자동차 경주를 실행하여 각 자동차들은 임의의 값을 기준으로 전진하거나 멈춘다.
      *
      * @param carList 경주에 참여할 자동차
      * @return 경주에 참여한 모든 자동차들의 게임 결과 리턴
@@ -44,12 +44,6 @@ public class CarGameService {
         return racingGameResult;
     }
 
-    /**
-     * <p>자동차 경주 한판의 전진 결과</p>
-     * 각 자동차들은 임의의 값을 기준으로 전진하거나 멈춘다.
-     *
-     * @return List<Car> 각 자동차들의 경주 결과를 담아서 리턴
-     */
     private List<Car> getRacingGameResult(List<Car> carList){
         for(Car car : carList){
             int randomNumber = car.getRandomNumber();
@@ -63,12 +57,12 @@ public class CarGameService {
     }
 
     /**
-     * 자동차 실행 결과 가공하기
+     * 모든 자동차들의 경주 결과를 "{자동차명} : {전진횟수}" 형태로 가공한다.
      *
      * @param carList 경주한 자동차와 이동횟수를 담은 리스트
-     * @return 가공될 게임메세지가 담긴 리스트 리턴
+     * @return 가공된 전체 경주 결과 리턴
      */
-    public List<String> getRacingGameResultList(List<Car> carList){
+    public List<String> getRacingGameWinnerList(List<Car> carList){
         List<String> racingGameResultList = new ArrayList<>();
 
         for(Car car : carList){
@@ -79,7 +73,6 @@ public class CarGameService {
         return racingGameResultList;
     }
 
-    // "{자동차명} : {전진횟수}" 형태로 가공하여 리턴
     private String getRacingGameProgress(int stepCount, String carName){
         String step = "";
         while (stepCount > 0){
