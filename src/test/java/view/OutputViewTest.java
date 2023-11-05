@@ -25,18 +25,19 @@ public class OutputViewTest {
     @ParameterizedTest
     @EnumSource(MessageType.class)
     void getGameMessageTest(MessageType messageType){
-        // Arrange
+        // given
         OutputView mockOutput = mock(OutputView.class);
-        doAnswer((Answer<Void>) invocation -> { // Void 메소드에 대한 스텁 처리
+
+        // when: 게임메세지 출력 메소드 호출
+        doAnswer((Answer<Void>) invocation -> {
             outputView.printGameMessage(messageType);
             return null;
         }).when(mockOutput).printGameMessage(messageType);
 //        doNothing().when(mockOutput).printGameMessage(messageType);
 
-        // Act: void 메소드 호출
         mockOutput.printGameMessage(messageType);
 
-        // Assert: print()가 1번 호출되었는지 확인
+        // then: print()가 1번 호출되었는지 확인
         verify(mockOutput, times(1)).printGameMessage(messageType);
     }
 

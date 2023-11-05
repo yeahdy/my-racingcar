@@ -5,8 +5,6 @@ import static constants.MessageType.PROGRESS_RESULT;
 import static constants.MessageType.TRY_COUNT;
 
 import camp.nextstep.edu.missionutils.Console;
-import constants.ErrorCodeConstant;
-import constants.GameConstant;
 import java.util.List;
 import model.Car;
 import model.Game;

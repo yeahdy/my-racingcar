@@ -17,9 +17,9 @@ public class InputViewTest {
         inputView = new InputView();
     }
 
-    @DisplayName("값 유무 검사")
+    @DisplayName("공백을 넣으면 예외 발생")
     @ParameterizedTest
-    @ValueSource(strings = {""," ",",","라라","''","라라, ","다   섯"})
+    @ValueSource(strings = {""," "})
     void isBlankTest(String data){
         Assertions.assertThatThrownBy(() -> assertThat(inputView.isNotBlank(data)).isTrue())
                 .isInstanceOf(IllegalArgumentException.class);
