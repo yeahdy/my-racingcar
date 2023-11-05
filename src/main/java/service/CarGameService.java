@@ -2,6 +2,8 @@ package service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import model.Car;
 import model.Game;
 
@@ -85,11 +87,8 @@ public class CarGameService {
             step += "-";
         }
 
-        StringBuilder gameText = new StringBuilder(carName)
-                .append(" : ")
-                .append(step);
-
-        return gameText.toString();
+        return Stream.of(carName, " : ", step)
+                .collect(Collectors.joining());
     }
 
     /**
